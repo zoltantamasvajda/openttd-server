@@ -1,0 +1,6 @@
+prime/
+stage/
+parts/
+*.snap
+*source.tar.bz2
+*.snap-build*
