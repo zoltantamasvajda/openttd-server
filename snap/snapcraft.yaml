@@ -40,6 +40,8 @@ parts:
       - zlib1g
       - libpulse0
       - libgl1-mesa-dri
+      - timidity
+      - freepats
     #TODO: Clean this up
     build: |
       ./configure
