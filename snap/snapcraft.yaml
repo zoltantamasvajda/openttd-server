@@ -12,7 +12,7 @@ confinement: strict
 apps:
   openttd:
     command: desktop-launch $SNAP/opt/openttd/openttd
-    plugs: [network, network-bind, x11, opengl, pulseaudio]
+    plugs: [network, network-bind, x11, opengl, pulseaudio, alsa]
 
 
 parts:
@@ -78,6 +78,7 @@ parts:
       mkdir -p $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opensfx/
       cp opensfx.cat $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opensfx/
       cp opensfx.obs $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opensfx/
+      cp docs/* $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opensfx/
     after: [openttd]
 
   openmsx:
@@ -91,5 +92,6 @@ parts:
       mkdir -p $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/openmsx/
       cp openmsx.obm $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/openmsx/
       cp src/* $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/openmsx/
+      cp docs/* $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/openmsx/
     after: [openttd]
 
