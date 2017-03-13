@@ -1,5 +1,7 @@
 name: openttd-casept
 version: '1.6.1'
+# Uncomment if building 1.7.0-RC1
+#version: '1.7.0-RC1'
 summary: OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe 
 description: |
   OpenTTD is an open source simulation game based upon the popular
@@ -19,6 +21,8 @@ parts:
   openttd:
     plugin: autotools
     source: https://binaries.openttd.org/releases/1.6.1/openttd-1.6.1-source.tar.gz
+    # Uncomment if building 1.7.0-RC1
+    #source: https://binaries.openttd.org/releases/1.7.0-RC1/openttd-1.7.0-RC1-source.tar.gz
     build-packages:
       - build-essential
       - pkg-config
