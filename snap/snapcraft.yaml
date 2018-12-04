@@ -1,13 +1,13 @@
 name: openttd-casept
-version: '1.7.0'
-summary: OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe 
+version: '1.8.0'
+summary: OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe
 description: |
   OpenTTD is an open source simulation game based upon the popular
   Microprose game Transport Tycoon Deluxe, written by Chris Sawyer.
   It attempts to mimic the original game as closely as possible while extending it with new features.
   This is an unofficial snap containing both the engine and open* asset packs.
 
-grade: stable 
+grade: stable
 confinement: strict
 apps:
   openttd:
@@ -18,7 +18,7 @@ apps:
 parts:
   openttd:
     plugin: autotools
-    source: https://binaries.openttd.org/releases/1.7.0/openttd-1.7.0-source.tar.gz
+    source: https://binaries.openttd.org/releases/1.8.0/openttd-1.8.0-source.tar.gz
     build-packages:
       - build-essential
       - pkg-config
@@ -30,8 +30,8 @@ parts:
       - libfontconfig1-dev
       - libicu-dev
     stage-packages:
-      - libicu55 
-      - libsdl1.2debian 
+      - libicu55
+      - libsdl1.2debian
       - fontconfig
       - libfreetype6
       - libpng12-0
@@ -40,6 +40,9 @@ parts:
       - zlib1g
       - libpulse0
       - libgl1-mesa-dri
+      - libglu1-mesa
+      - libx11-xcb1
+      - libxdamage1
       - timidity
       - freepats
     #TODO: Clean this up
@@ -70,7 +73,7 @@ parts:
 
   opensfx:
     plugin: make
-    source: https://binaries.openttd.org/extra/opensfx/0.2.3/opensfx-0.2.3-source.tar.gz 
+    source: https://binaries.openttd.org/extra/opensfx/0.2.3/opensfx-0.2.3-source.tar.gz
     build-packages:
       - catcodec
     build: make
@@ -83,7 +86,7 @@ parts:
 
   openmsx:
     plugin: make
-    source: https://binaries.openttd.org/extra/openmsx/0.3.1/openmsx-0.3.1-source.tar.gz 
+    source: https://binaries.openttd.org/extra/openmsx/0.3.1/openmsx-0.3.1-source.tar.gz
     build-packages:
       - dos2unix
       - python
