@@ -1,100 +1,99 @@
-name: openttd-casept
-version: '1.8.0'
+name: openttd
+adopt-info: openttd
 summary: OpenTTD is an open source simulation game based upon Transport Tycoon Deluxe
-description: |
+description: >
   OpenTTD is an open source simulation game based upon the popular
   Microprose game Transport Tycoon Deluxe, written by Chris Sawyer.
-  It attempts to mimic the original game as closely as possible while extending it with new features.
+  It attempts to mimic the original game as closely as possible while
+  extending it with new features.
   This is an unofficial snap containing both the engine and open* asset packs.
+
+  * Upstream project: https://www.openttd.org/
+  * Snapcraft.yaml repository: https://github.com/diddlesnaps/openttd
 
 grade: stable
 confinement: strict
+base: core18
+
 apps:
   openttd:
-    command: desktop-launch $SNAP/opt/openttd/openttd
-    plugs: [network, network-bind, x11, opengl, pulseaudio, alsa]
-
+    command: usr/games/openttd/openttd
+    desktop: usr/share/applications/openttd.desktop
+    extensions: [gnome-3-28]
+    plugs:
+      - audio-playback
+      - network
+      - network-bind
+      - opengl
+      - x11
 
 parts:
   openttd:
     plugin: autotools
-    source: https://binaries.openttd.org/releases/1.8.0/openttd-1.8.0-source.tar.gz
+    source: https://github.com/OpenTTD/OpenTTD.git
+    override-pull: |
+      snapcraftctl pull
+      VERSION="$(git tag --list --sort=version:refname | grep -v -E '(-RC|beta)' | tail -n1)"
+      git checkout "$VERSION"
+      snapcraftctl set-version "$VERSION"
+      sed -E -i 's|^Icon=.*|Icon=/usr/share/icons/hicolor/256x256/apps/openttd.png|' media/openttd.desktop.in
+    configflags:
+      - --prefix=/usr
+      - --binary-dir=games/openttd
+      - --data-dir=games/openttd
+      - --install-dir=$SNAPCRAFT_PART_INSTALL
+      - --enable-lto
+      - --enable-strip
+      - --with-fluidsynth
+      - --with-sdl=sdl2
+      - --with-zlib
+      - --with-liblzma
+      - --with-liblzo2
+      - --with-libpng
+      - --with-freetype
+      - --with-fontconfig
+      - --with-icu
+      - --with-icu-layout
+      - --with-iconv
     build-packages:
-      - build-essential
-      - pkg-config
-      - libsdl1.2-dev
+      - g++
       - patch
-      - zlib1g-dev
-      - liblzo2-dev
-      - liblzma-dev
+      - libfluidsynth-dev
       - libfontconfig1-dev
+      - libglu1-mesa-dev
       - libicu-dev
+      - liblzma-dev
+      - liblzo2-dev
+      - libsdl2-dev
+      - zlib1g-dev
     stage-packages:
-      - libicu55
-      - libsdl1.2debian
       - fontconfig
-      - libfreetype6
-      - libpng12-0
-      - liblzo2-2
-      - liblzma5
-      - zlib1g
-      - libpulse0
-      - libgl1-mesa-dri
-      - libglu1-mesa
-      - libx11-xcb1
-      - libxdamage1
-      - timidity
       - freepats
-    #TODO: Clean this up
-    build: |
-      ./configure
-      make -j$(nproc)
-    install: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/opt/openttd/
-      cp -r bin/* $SNAPCRAFT_PART_INSTALL/opt/openttd/
-    after: [desktop-glib-only]
+      - libfluidsynth1
+      - libfreetype6
+      - libglu1-mesa
+      - libicu-le-hb0
+      - libicu60
+      - libiculx60
+      - liblzma5
+      - liblzo2-2
+      - libsdl2-2.0-0
+      - timidity
 
   opengfx:
-    plugin: make
-    source: https://binaries.openttd.org/extra/opengfx/0.5.2/opengfx-0.5.2-source.tar.xz
-    build-packages:
-      # Yes, we do indeed need GIMP
-      - gimp
-      - nml
-      - dos2unix
-      - grfcodec
-      - tar
-      - gcc
-    build: make
-    install: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opengfx/
-      cp -r opengfx-0.5.2/* $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opengfx/
-    after: [openttd]
+    plugin: dump
+    source: https://cdn.openttd.org/opengfx-releases/0.6.0/opengfx-0.6.0-all.zip
+    organize:
+      opengfx-*.tar: usr/games/openttd/baseset/
 
   opensfx:
-    plugin: make
-    source: https://binaries.openttd.org/extra/opensfx/0.2.3/opensfx-0.2.3-source.tar.gz
-    build-packages:
-      - catcodec
-    build: make
-    install: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opensfx/
-      cp opensfx.cat $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opensfx/
-      cp opensfx.obs $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opensfx/
-      cp docs/* $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/opensfx/
-    after: [openttd]
+    plugin: dump
+    source: https://cdn.openttd.org/opensfx-releases/0.2.3/opensfx-0.2.3-all.zip
+    organize:
+      opensfx-*: usr/games/openttd/baseset/
 
   openmsx:
-    plugin: make
-    source: https://binaries.openttd.org/extra/openmsx/0.3.1/openmsx-0.3.1-source.tar.gz
-    build-packages:
-      - dos2unix
-      - python
-    build: make
-    install: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/openmsx/
-      cp openmsx.obm $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/openmsx/
-      cp src/* $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/openmsx/
-      cp docs/* $SNAPCRAFT_PART_INSTALL/opt/openttd/baseset/openmsx/
-    after: [openttd]
-
+    plugin: dump
+    source: https://cdn.openttd.org/openmsx-releases/0.3.1/openmsx-0.3.1-all.zip
+    organize:
+      openmsx-*: usr/games/openttd/baseset/
