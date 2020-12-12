@@ -17,15 +17,11 @@ base: core18
 
 apps:
   openttd:
-    command: usr/games/openttd/openttd
-    desktop: usr/share/applications/openttd.desktop
-    extensions: [gnome-3-28]
+    command: usr/games/openttd/openttd -D
+    daemon: simple
     plugs:
-      - audio-playback
       - network
       - network-bind
-      - opengl
-      - x11
 
 parts:
   openttd:
