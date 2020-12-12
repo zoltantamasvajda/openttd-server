@@ -16,7 +16,7 @@ confinement: strict
 base: core18
 
 apps:
-  openttd:
+  openttd-server:
     command: usr/games/openttd/openttd -D
     daemon: simple
     plugs:
@@ -24,7 +24,7 @@ apps:
       - network-bind
 
 parts:
-  openttd:
+  openttd-server:
     plugin: autotools
     source: https://github.com/OpenTTD/OpenTTD.git
     override-pull: |
