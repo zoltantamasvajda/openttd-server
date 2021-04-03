@@ -34,29 +34,23 @@ parts:
       snapcraftctl set-version "$VERSION"
       sed -E -i 's|^Icon=.*|Icon=/usr/share/icons/hicolor/256x256/apps/openttd.png|' media/openttd.desktop
     build-packages:
-      - g++
-      - patch
-      - libfluidsynth-dev
-      - libfontconfig1-dev
-      - libglu1-mesa-dev
-      - libicu-dev
-      - liblzma-dev
-      - liblzo2-dev
-      - libsdl2-dev
       - zlib1g-dev
+      - liblzo2-dev
+      - liblzma-dev
+      - libpng-dev
+      - libfreetype-dev
+      - libfontconfig1-dev
+      - libicu-dev
+      - libsdl2-dev
     stage-packages:
-      - fontconfig
-      - freepats
-      - libfluidsynth2
+      - zlib1g
+      - liblzo2
+      - liblzma
+      - libpng1.6
       - libfreetype6
-      - libglu1-mesa
-      - libicu-le-hb0
-      - libicu60
-      - libiculx60
-      - liblzma5
-      - liblzo2-2
+      - libfontconfig1
+      - libicu66
       - libsdl2-2.0-0
-      - timidity
 
   opengfx:
     plugin: dump
