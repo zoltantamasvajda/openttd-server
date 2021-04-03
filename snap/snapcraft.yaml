@@ -47,7 +47,7 @@ parts:
     stage-packages:
       - fontconfig
       - freepats
-      - libfluidsynth1
+      - libfluidsynth2
       - libfreetype6
       - libglu1-mesa
       - libicu-le-hb0
