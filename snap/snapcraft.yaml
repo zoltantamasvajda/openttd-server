@@ -44,7 +44,7 @@ parts:
       - libsdl2-dev
     stage-packages:
       - zlib1g
-      - liblzo2
+      - liblzo2-2
       - liblzma5
       - libpng16-16
       - libfreetype6
