@@ -9,7 +9,7 @@ description: >
   This is an unofficial snap containing both the engine and open* asset packs.
 
   * Upstream project: https://www.openttd.org/
-  * Snapcraft.yaml repository: https://github.com/diddlesnaps/openttd
+  * Snapcraft.yaml repository: https://github.com/zoltantamasvajda/openttd-server
 
 grade: stable
 confinement: strict
@@ -32,9 +32,12 @@ parts:
       VERSION="$(git tag --list --sort=version:refname | grep -v -E '(-RC|beta)' | tail -n1)"
       git checkout "$VERSION"
       snapcraftctl set-version "$VERSION"
-      sed -E -i 's|^Icon=.*|Icon=/usr/share/icons/hicolor/256x256/apps/openttd.png|' media/openttd.desktop
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DCMAKE_INSTALL_DATADIR=games/openttd
+      - -DCMAKE_INSTALL_BINDIR=games/openttd
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL
     build-packages:
       - zlib1g-dev
       - liblzo2-dev
