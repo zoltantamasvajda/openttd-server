@@ -33,6 +33,8 @@ parts:
       git checkout "$VERSION"
       snapcraftctl set-version "$VERSION"
       sed -E -i 's|^Icon=.*|Icon=/usr/share/icons/hicolor/256x256/apps/openttd.png|' media/openttd.desktop
+    cmake-parameters:
+      - -DCMAKE_INSTALL_PREFIX=/usr
     build-packages:
       - zlib1g-dev
       - liblzo2-dev
