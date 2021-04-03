@@ -13,7 +13,7 @@ description: >
 
 grade: stable
 confinement: strict
-base: core18
+base: core20
 
 apps:
   openttd-server:
@@ -25,7 +25,7 @@ apps:
 
 parts:
   openttd-server:
-    plugin: autotools
+    plugin: cmake
     source: https://github.com/OpenTTD/OpenTTD.git
     override-pull: |
       snapcraftctl pull
