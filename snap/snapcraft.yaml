@@ -32,7 +32,7 @@ parts:
       VERSION="$(git tag --list --sort=version:refname | grep -v -E '(-RC|beta)' | tail -n1)"
       git checkout "$VERSION"
       snapcraftctl set-version "$VERSION"
-      sed -E -i 's|^Icon=.*|Icon=/usr/share/icons/hicolor/256x256/apps/openttd.png|' media/openttd.desktop.in
+      sed -E -i 's|^Icon=.*|Icon=/usr/share/icons/hicolor/256x256/apps/openttd.png|' media/openttd.desktop
     configflags:
       - --prefix=/usr
       - --binary-dir=games/openttd
