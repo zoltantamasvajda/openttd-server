@@ -45,7 +45,7 @@ parts:
     stage-packages:
       - zlib1g
       - liblzo2
-      - liblzma
+      - liblzma5
       - libpng1.6
       - libfreetype6
       - libfontconfig1
