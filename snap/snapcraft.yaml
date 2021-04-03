@@ -33,24 +33,6 @@ parts:
       git checkout "$VERSION"
       snapcraftctl set-version "$VERSION"
       sed -E -i 's|^Icon=.*|Icon=/usr/share/icons/hicolor/256x256/apps/openttd.png|' media/openttd.desktop
-    configflags:
-      - --prefix=/usr
-      - --binary-dir=games/openttd
-      - --data-dir=games/openttd
-      - --install-dir=$SNAPCRAFT_PART_INSTALL
-      - --enable-lto
-      - --enable-strip
-      - --with-fluidsynth
-      - --with-sdl=sdl2
-      - --with-zlib
-      - --with-liblzma
-      - --with-liblzo2
-      - --with-libpng
-      - --with-freetype
-      - --with-fontconfig
-      - --with-icu
-      - --with-icu-layout
-      - --with-iconv
     build-packages:
       - g++
       - patch
