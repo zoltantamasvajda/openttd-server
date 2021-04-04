@@ -37,7 +37,6 @@ parts:
       - -DCMAKE_INSTALL_DATADIR=games/openttd
       - -DCMAKE_INSTALL_BINDIR=games/openttd
       - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=$SNAPCRAFT_PART_INSTALL
     build-packages:
       - zlib1g-dev
       - liblzo2-dev
