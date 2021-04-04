@@ -37,7 +37,7 @@ parts:
       - -DCMAKE_INSTALL_DATADIR=games
       - -DCMAKE_INSTALL_BINDIR=games/openttd
       - -DCMAKE_BUILD_TYPE=Release
-      - -DOPTION_DEDICATED
+      - -DOPTION_DEDICATED=ON
     build-packages:
       - zlib1g-dev
       - liblzma-dev
