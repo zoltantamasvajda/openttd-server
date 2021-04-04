@@ -34,7 +34,7 @@ parts:
       snapcraftctl set-version "$VERSION"
     cmake-parameters:
       - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DCMAKE_INSTALL_DATADIR=games/openttd
+      - -DCMAKE_INSTALL_DATADIR=games
       - -DCMAKE_INSTALL_BINDIR=games/openttd
       - -DCMAKE_BUILD_TYPE=Release
     build-packages:
