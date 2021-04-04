@@ -37,39 +37,14 @@ parts:
       - -DCMAKE_INSTALL_DATADIR=games
       - -DCMAKE_INSTALL_BINDIR=games/openttd
       - -DCMAKE_BUILD_TYPE=Release
+      - -DOPTION_DEDICATED
     build-packages:
       - zlib1g-dev
-      - liblzo2-dev
       - liblzma-dev
+      - liblzo2-dev
       - libpng-dev
-      - libfreetype-dev
-      - libfontconfig1-dev
-      - libicu-dev
-      - libsdl2-dev
     stage-packages:
       - zlib1g
-      - liblzo2-2
       - liblzma5
+      - liblzo2-2
       - libpng16-16
-      - libfreetype6
-      - libfontconfig1
-      - libicu66
-      - libsdl2-2.0-0
-
-  opengfx:
-    plugin: dump
-    source: https://cdn.openttd.org/opengfx-releases/0.6.0/opengfx-0.6.0-all.zip
-    organize:
-      opengfx-*.tar: usr/games/openttd/baseset/
-
-  opensfx:
-    plugin: dump
-    source: https://cdn.openttd.org/opensfx-releases/0.2.3/opensfx-0.2.3-all.zip
-    organize:
-      opensfx-*: usr/games/openttd/baseset/
-
-  openmsx:
-    plugin: dump
-    source: https://cdn.openttd.org/openmsx-releases/0.3.1/openmsx-0.3.1-all.zip
-    organize:
-      openmsx-*: usr/games/openttd/baseset/
