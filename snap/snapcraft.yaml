@@ -48,3 +48,21 @@ parts:
       - liblzma5
       - liblzo2-2
       - libpng16-16
+
+  opengfx:
+    plugin: dump
+    source: https://cdn.openttd.org/opengfx-releases/0.6.1/opengfx-0.6.1-all.zip
+    organize:
+      opengfx-*.tar: usr/games/openttd/baseset/
+
+  opensfx:
+    plugin: dump
+    source: https://cdn.openttd.org/opensfx-releases/1.0.1/opensfx-1.0.1-all.zip
+    organize:
+      opensfx-*: usr/games/openttd/baseset/
+
+  openmsx:
+    plugin: dump
+    source: https://cdn.openttd.org/openmsx-releases/0.4.0/openmsx-0.4.0-all.zip
+    organize:
+      openmsx-*: usr/games/openttd/baseset/
