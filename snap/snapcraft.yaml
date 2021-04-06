@@ -17,6 +17,7 @@ base: core20
 architectures:
   - build-on: amd64
   - build-on: arm64
+  - build-on: armhf
 
 apps:
   openttd-server:
