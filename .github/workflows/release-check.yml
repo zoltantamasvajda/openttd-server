@@ -1,0 +1,20 @@
+
+name: Check for new releases 🚀
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get latest version
+        id: version-check
+        run: echo "$(curl -sL https://api.github.com/repos/openttd/openttd/releases/latest | jq -r ".tag_name")" > .latest-version          
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: New version
+          branch: master
