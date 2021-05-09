@@ -1,0 +1,12 @@
+#!/bin/bash
+
+rcon_passwd="$(snapctl get rcon-passwd)"
+
+CONFIG_FILE=/root/snap/openttd-server/current/.config/openttd/openttd.cfg
+
+if test -f "$CONFIG_FILE"; then
+    echo "$CONFIG_FILE exists."
+    sed -i "s/^rcon_password .*$/rcon_password = $rcon_passwd/" $CONFIG_FILE
+fi
+
+snapctl restart openttd-server.openttd-server

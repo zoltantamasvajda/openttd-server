@@ -21,7 +21,7 @@ architectures:
 
 apps:
   openttd-server:
-    command: usr/games/openttd/openttd -D
+    command: usr/games/openttd/scripts/entrypoint.sh
     daemon: simple
     plugs:
       - network
@@ -52,7 +52,13 @@ parts:
       - liblzma5
       - liblzo2-2
       - libpng16-16
-
+  
+  scripts:
+    plugin: dump
+    source: src/scripts
+    source-type: local
+    organize:
+      '*': usr/games/openttd/scripts/
   opengfx:
     plugin: dump
     source: https://cdn.openttd.org/opengfx-releases/0.6.1/opengfx-0.6.1-all.zip

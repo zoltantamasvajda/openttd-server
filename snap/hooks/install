@@ -1,0 +1,5 @@
+#!/bin/bash
+
+snapctl set loadgame=last-autosave
+
+snapctl set rcon-passwd=default
