@@ -24,11 +24,7 @@ The configuration file can be found under `/root/snap/openttd-server/current/.co
 
 Alternatively [rcon](https://wiki.openttd.org/en/Manual/Dedicated%20server#controlling-the-server-with-rcon) can be used to set up the server. The default rcon password is `default` and can be changed by running:
 
-`sudo snap stop openttd-server`
-
 `sudo snap set openttd-server rcon-passwd=YourChosenPassword`
-
-`sudo snap start openttd-server`
 
 ## Setting savegame behavior
 
