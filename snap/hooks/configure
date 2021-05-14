@@ -1,8 +1,19 @@
 #!/bin/bash
 
 rcon_passwd="$(snapctl get rcon-passwd)"
+loadgame="$(snapctl get loadgame)"
 
 CONFIG_FILE=/root/snap/openttd-server/current/.config/openttd/openttd.cfg
+
+if [ -z "$loadgame" ]; then
+    loadgame="last-autosave"
+    snapctl set loadgame="last-autosave"
+fi
+
+if [ -z "$rcon_passwd" ]; then
+    rcon_passwd="default"
+    snapctl set rcon_passwd="default"
+fi
 
 if test -f "$CONFIG_FILE"; then
     echo "$CONFIG_FILE exists."
