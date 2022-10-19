@@ -4,6 +4,38 @@ set -u
 # This script is based fairly heavily off bateau84/openttd's. Thanks, man!
 savepath="${HOME}/.local/share/openttd/save"
 loadgame="$(snapctl get loadgame)"
+rcon_passwd="$(snapctl get rcon-passwd)"
+
+if [ -z "$loadgame" ]; then
+    loadgame="last-autosave"
+fi
+
+if [ -z "$rcon_passwd" ]; then
+    rcon_passwd="default"
+fi
+
+CONFIG_FILE=$SNAP_USER_DATA/.config/openttd/openttd.cfg
+SECRETS_FILE=$SNAP_USER_DATA/.config/openttd/secrets.cfg
+FILE_TO_WRITE=$CONFIG_FILE
+
+if test -f "$CONFIG_FILE"; then
+    echo "$CONFIG_FILE exists."
+    if test -f "$SECRETS_FILE"; then
+        echo "$SECRETS_FILE exists."
+        FILE_TO_WRITE=$SECRETS_FILE
+    fi
+    if [ -z "$(grep rcon_password $FILE_TO_WRITE)" ]; then
+        sed -i "/\[network\]/a rcon_password = $rcon_passwd" $FILE_TO_WRITE
+    else
+        sed -i "s/^rcon_password .*$/rcon_password = $rcon_passwd/" $FILE_TO_WRITE
+    fi
+else
+    echo "$CONFIG_FILE does not exist. Creating."
+    mkdir -p $SNAP_USER_DATA/.config/openttd
+    touch $CONFIG_FILE
+    echo '[network]' >> $CONFIG_FILE
+    echo "rcon_password = $rcon_password" >> $CONFIG_FILE
+fi
 
 echo ${loadgame}
 

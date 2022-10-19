@@ -16,15 +16,27 @@ Upstream project:
 
 ## Configuring: 
 
-### Editing the config file
-
-The configuration file can be found under `/root/snap/openttd-server/current/.config/openttd/openttd.cfg` and can be used the [usual way](https://wiki.openttd.org/en/Archive/Manual/Settings/Openttd.cfg) to set up the server (root access required). The file persists between restarts and updates. In order for the change to persist the server has to be stopped using `sudo snap stop openttd-server` before editing the config file. After the edits are saved the server can be restarted using `sudo snap start openttd-server`.
-
 ### Using rcon
 
-Alternatively [rcon](https://wiki.openttd.org/en/Manual/Dedicated%20server#controlling-the-server-with-rcon) can be used to set up the server. The default rcon password is `default` and can be changed by running:
+ The recommended way to configure the server is using [rcon](https://wiki.openttd.org/en/Manual/Dedicated%20server#controlling-the-server-with-rcon).
+ 
+ The default rcon password is `default` and can be changed by running:
 
 `sudo snap set openttd-server rcon-passwd=YourChosenPassword`
+
+### Editing the config file
+
+Alternatively the configuration file can be accessed under `/root/snap/openttd-server/current/.config/openttd/openttd.cfg` and can be used the [usual way](https://wiki.openttd.org/en/Archive/Manual/Settings/Openttd.cfg) (root filesystem access required).
+
+In order for the changes to persist the server has to be stopped using `sudo snap stop openttd-server` before editing the config file. After the edits are saved the server can be restarted using `sudo snap start openttd-server`.
+
+By default the file does not exist. In order to generate it:
+1. Start the server
+2. Join the server
+3. Open the console using the `~` key
+4. run `rcon default saveconfig`
+
+This will populate the config file with the default settings which can then be edited as needed.
 
 ## Setting savegame behavior
 
@@ -36,4 +48,4 @@ The default behavior is `last-autosave` and it loads the latest savefile from th
 
 Using the value `false` will generate a new game on each restart.
 
-Lastly specifying a filename will load that file (if it exists inside the savegame folder `/root/snap/openttd-server/current/.local/share/openttd/save`).
+Lastly specifying a filename will attempt to load that file (if it exists inside the savegame folder `/root/snap/openttd-server/current/.local/share/openttd/save`).
